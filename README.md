@@ -1,1 +1,1 @@
-![Image alt text](svg.svg)
+![ ](svg.svg)
