@@ -1,3 +1,3 @@
 # SaggeeNiccolo
 
-![Image alt text](hello-animated.svg)
+![Image alt text](svg.svg)
