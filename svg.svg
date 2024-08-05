@@ -27,7 +27,7 @@
 
         .container {
           --color-main: #5452ee;
-          --color-primary: #e73c7e;
+          --color-primary: #ffff00;
           --color-secondary: #23a6d5;
           --color-tertiary: #ffff;
 
