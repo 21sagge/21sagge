@@ -92,16 +92,56 @@
         <feMergeNode in="shineB"/>
       </feMerge>
     </filter>
+    <filter id="wb0" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="-1.2s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb1" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="2.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb2" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="6.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb3" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="10.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb4" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="14.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb5" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="18.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb6" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="22.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
+    <filter id="wb7" filterUnits="userSpaceOnUse" x="0" y="20" width="800" height="230">
+      <feGaussianBlur stdDeviation="0">
+        <animate attributeName="stdDeviation" dur="32s" begin="26.8s" repeatCount="indefinite" keyTimes="0.00000;0.00075;0.00187;0.00375;0.00562;0.00750;0.01125;0.01500;0.01875;0.02250;0.02625;0.03000;0.03375;0.03562;0.03750;0.12500;0.12575;0.12687;0.12875;0.13062;0.13250;0.13625;0.14000;0.14375;0.14750;0.15125;0.15500;0.15875;0.16062;0.16250;1.00000" values="40.0;40.0;40.0;40.0;40.0;32.0;18.7;12.0;8.0;5.3;3.4;2.0;0.9;0.4;0.0;0.0;0.2;0.4;0.9;1.4;2.0;3.4;5.3;8.0;12.0;18.7;32.0;40.0;40.0;40.0;40.0"/>
+      </feGaussianBlur>
+    </filter>
     <mask id="words" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="300">
       <g fill="#fff" filter="url(#melt)">
-      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
+      <text class="g first" x="400" y="148" filter="url(#wb0)" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" filter="url(#wb1)" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" filter="url(#wb2)" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" filter="url(#wb3)" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" filter="url(#wb4)" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" filter="url(#wb5)" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" filter="url(#wb6)" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" filter="url(#wb7)" style="animation-delay:26.8s">こんにちは</text>
       </g>
     </mask>
 
@@ -186,43 +226,44 @@
     @keyframes flicker { 0%, 100% { opacity: 1 } 45% { opacity: .75 } 60% { opacity: 1 } }
     @keyframes drift { from { transform: translateX(-260px) } to { transform: translateX(1060px) } }
     @keyframes greet {
-      0.000% { opacity: 0.000; filter: blur(40.0px) }
-      0.075% { opacity: 0.209; filter: blur(40.0px) }
-      0.188% { opacity: 0.302; filter: blur(40.0px) }
-      0.375% { opacity: 0.398; filter: blur(40.0px) }
-      0.562% { opacity: 0.468; filter: blur(40.0px) }
-      0.750% { opacity: 0.525; filter: blur(32.0px) }
-      1.125% { opacity: 0.618; filter: blur(18.7px) }
-      1.500% { opacity: 0.693; filter: blur(12.0px) }
-      1.875% { opacity: 0.758; filter: blur(8.0px) }
-      2.250% { opacity: 0.815; filter: blur(5.3px) }
-      2.625% { opacity: 0.867; filter: blur(3.4px) }
-      3.000% { opacity: 0.915; filter: blur(2.0px) }
-      3.375% { opacity: 0.959; filter: blur(0.9px) }
-      3.562% { opacity: 0.980; filter: blur(0.4px) }
-      3.750% { opacity: 1.000; filter: blur(0.0px) }
-      12.500% { opacity: 1.000; filter: blur(0.0px) }
-      12.575% { opacity: 0.992; filter: blur(0.2px) }
-      12.688% { opacity: 0.980; filter: blur(0.4px) }
-      12.875% { opacity: 0.959; filter: blur(0.9px) }
-      13.062% { opacity: 0.937; filter: blur(1.4px) }
-      13.250% { opacity: 0.915; filter: blur(2.0px) }
-      13.625% { opacity: 0.867; filter: blur(3.4px) }
-      14.000% { opacity: 0.815; filter: blur(5.3px) }
-      14.375% { opacity: 0.758; filter: blur(8.0px) }
-      14.750% { opacity: 0.693; filter: blur(12.0px) }
-      15.125% { opacity: 0.618; filter: blur(18.7px) }
-      15.500% { opacity: 0.525; filter: blur(32.0px) }
-      15.875% { opacity: 0.398; filter: blur(40.0px) }
-      16.062% { opacity: 0.302; filter: blur(40.0px) }
-      16.250% { opacity: 0.000; filter: blur(40.0px) }
-      100.000% { opacity: 0.000; filter: blur(40.0px) } }
+      0.000% { opacity: 0.000 }
+      0.075% { opacity: 0.209 }
+      0.188% { opacity: 0.302 }
+      0.375% { opacity: 0.398 }
+      0.562% { opacity: 0.468 }
+      0.750% { opacity: 0.525 }
+      1.125% { opacity: 0.618 }
+      1.500% { opacity: 0.693 }
+      1.875% { opacity: 0.758 }
+      2.250% { opacity: 0.815 }
+      2.625% { opacity: 0.867 }
+      3.000% { opacity: 0.915 }
+      3.375% { opacity: 0.959 }
+      3.562% { opacity: 0.980 }
+      3.750% { opacity: 1.000 }
+      12.500% { opacity: 1.000 }
+      12.575% { opacity: 0.992 }
+      12.687% { opacity: 0.980 }
+      12.875% { opacity: 0.959 }
+      13.062% { opacity: 0.937 }
+      13.250% { opacity: 0.915 }
+      13.625% { opacity: 0.867 }
+      14.000% { opacity: 0.815 }
+      14.375% { opacity: 0.758 }
+      14.750% { opacity: 0.693 }
+      15.125% { opacity: 0.618 }
+      15.500% { opacity: 0.525 }
+      15.875% { opacity: 0.398 }
+      16.062% { opacity: 0.302 }
+      16.250% { opacity: 0.000 }
+      100.000% { opacity: 0.000 } }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
       .orbit { transform: rotate(62deg); }
       .cloudsA { transform: translateX(170px); }
       .cloudsB { transform: translateX(640px); }
+      .g { filter: none !important; }
       .g.first { opacity: 1; }
     }
   </style>
@@ -321,24 +362,24 @@
 
     <!-- rotating greetings: shadows, magnified sky + tint inside the letters, lit edges -->
     <g transform="translate(0 8)" fill="#050c33" opacity=".42" filter="url(#meltSoft)">
-      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
+      <text class="g first" x="400" y="148" filter="url(#wb0)" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" filter="url(#wb1)" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" filter="url(#wb2)" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" filter="url(#wb3)" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" filter="url(#wb4)" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" filter="url(#wb5)" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" filter="url(#wb6)" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" filter="url(#wb7)" style="animation-delay:26.8s">こんにちは</text>
     </g>
     <g transform="translate(0 3)" fill="#050c33" opacity=".3" filter="url(#meltTight)">
-      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
+      <text class="g first" x="400" y="148" filter="url(#wb0)" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" filter="url(#wb1)" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" filter="url(#wb2)" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" filter="url(#wb3)" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" filter="url(#wb4)" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" filter="url(#wb5)" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" filter="url(#wb6)" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" filter="url(#wb7)" style="animation-delay:26.8s">こんにちは</text>
     </g>
     <g mask="url(#words)">
       <g transform="translate(400 122) scale(1.14) translate(-400 -122)" filter="url(#lens)">
@@ -412,14 +453,14 @@
       <rect width="800" height="300" fill="url(#body)"/>
     </g>
     <g fill="#fff" filter="url(#edge)">
-      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
+      <text class="g first" x="400" y="148" filter="url(#wb0)" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" filter="url(#wb1)" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" filter="url(#wb2)" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" filter="url(#wb3)" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" filter="url(#wb4)" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" filter="url(#wb5)" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" filter="url(#wb6)" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" filter="url(#wb7)" style="animation-delay:26.8s">こんにちは</text>
     </g>
   </g>
 </svg>
