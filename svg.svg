@@ -24,17 +24,11 @@
       <stop offset="1" stop-color="#cfd8ff" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- lettering: body, rim light, lens, bevel, shadow, mask -->
-    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+    <!-- lettering: body tint, lens, melt (blur + alpha threshold), edge light, shadows, mask -->
+    <linearGradient id="body" gradientUnits="userSpaceOnUse" x1="0" y1="85" x2="0" y2="165">
       <stop offset="0" stop-color="#fff" stop-opacity=".42"/>
       <stop offset=".55" stop-color="#fff" stop-opacity=".1"/>
       <stop offset="1" stop-color="#5b8fe6" stop-opacity=".3"/>
-    </linearGradient>
-    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
-      <stop offset=".35" stop-color="#fff" stop-opacity=".4"/>
-      <stop offset=".65" stop-color="#fff" stop-opacity=".35"/>
-      <stop offset="1" stop-color="#fff" stop-opacity=".85"/>
     </linearGradient>
     <filter id="lens" filterUnits="userSpaceOnUse" x="120" y="50" width="560" height="140"
             color-interpolation-filters="sRGB">
@@ -46,44 +40,68 @@
         <feFuncB type="linear" slope="1.04" intercept="-.04"/>
       </feComponentTransfer>
     </filter>
-    <filter id="bevel" filterUnits="userSpaceOnUse" x="60" y="60" width="680" height="150"
+    <!-- the blurred words are cut at a fixed alpha, so overlapping words fuse into one blob -->
+    <filter id="melt" filterUnits="userSpaceOnUse" x="40" y="40" width="720" height="190"
             color-interpolation-filters="sRGB">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="blur"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+      <feGaussianBlur stdDeviation=".6"/>
+    </filter>
+    <filter id="meltSoft" filterUnits="userSpaceOnUse" x="40" y="40" width="720" height="200"
+            color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="meltTight" filterUnits="userSpaceOnUse" x="40" y="40" width="720" height="200"
+            color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+      <feGaussianBlur stdDeviation="1.3"/>
+    </filter>
+    <filter id="edge" filterUnits="userSpaceOnUse" x="40" y="40" width="720" height="190"
+            color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+      <feGaussianBlur stdDeviation=".6" result="shape"/>
+      <!-- thin lit contour -->
+      <feMorphology in="shape" operator="erode" radius="1.1" result="core"/>
+      <feComposite in="shape" in2="core" operator="out" result="ring"/>
+      <feColorMatrix in="ring" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0" result="contour"/>
+      <!-- highlights from two opposite directions -->
+      <feGaussianBlur in="shape" stdDeviation="2.2" result="blur"/>
       <feSpecularLighting in="blur" surfaceScale="5" specularConstant="1.2" specularExponent="26"
-                          lighting-color="#fff" result="spec">
+                          lighting-color="#fff" result="specA">
         <feDistantLight azimuth="235" elevation="50"/>
       </feSpecularLighting>
-      <feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/>
-      <feComponentTransfer in="SourceAlpha" result="inv">
+      <feComposite in="specA" in2="shape" operator="in" result="shineA"/>
+      <feSpecularLighting in="blur" surfaceScale="4" specularConstant=".7" specularExponent="22"
+                          lighting-color="#fff" result="specB">
+        <feDistantLight azimuth="55" elevation="40"/>
+      </feSpecularLighting>
+      <feComposite in="specB" in2="shape" operator="in" result="shineB"/>
+      <!-- inner shade on the lower-right edges -->
+      <feComponentTransfer in="shape" result="inv">
         <feFuncA type="table" tableValues="1 0"/>
       </feComponentTransfer>
       <feOffset in="inv" dx="-2" dy="-3" result="invShift"/>
       <feGaussianBlur in="invShift" stdDeviation="2.4" result="invBlur"/>
       <feFlood flood-color="#0a1a4a" flood-opacity=".5"/>
       <feComposite in2="invBlur" operator="in" result="shadeRaw"/>
-      <feComposite in="shadeRaw" in2="SourceAlpha" operator="in" result="shade"/>
+      <feComposite in="shadeRaw" in2="shape" operator="in" result="shade"/>
       <feMerge>
-        <feMergeNode in="SourceGraphic"/>
         <feMergeNode in="shade"/>
-        <feMergeNode in="shine"/>
+        <feMergeNode in="contour"/>
+        <feMergeNode in="shineA"/>
+        <feMergeNode in="shineB"/>
       </feMerge>
     </filter>
-    <filter id="soft" filterUnits="userSpaceOnUse" x="60" y="60" width="680" height="170">
-      <feGaussianBlur stdDeviation="6"/>
-    </filter>
-    <filter id="tight" filterUnits="userSpaceOnUse" x="60" y="60" width="680" height="170">
-      <feGaussianBlur stdDeviation="1.3"/>
-    </filter>
     <mask id="words" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="300">
-      <g fill="#fff">
-      <text class="g first" x="400" y="148" style="animation-delay:0s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:3s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:9s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:12s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:15s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:18s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:21s">こんにちは</text>
+      <g fill="#fff" filter="url(#melt)">
+      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
       </g>
     </mask>
 
@@ -125,7 +143,7 @@
   </defs>
 
   <style>
-    :root { --cycle: 24s; --start: -5s; }
+    :root { --cycle: 24s; --start: -5s; --gcycle: 32s; }
 
     .orbit   { transform-box: view-box; transform-origin: 400px 282px;
                animation: orbit var(--cycle) linear var(--start) infinite; }
@@ -143,7 +161,7 @@
     .g  { font: 800 78px ui-rounded, system-ui, "Segoe UI", Roboto, "Hiragino Sans",
                  "Noto Sans CJK JP", "Microsoft YaHei", sans-serif;
           text-anchor: middle; opacity: 0;
-          animation: greet var(--cycle) ease-in-out infinite; }
+          animation: greet var(--gcycle) linear infinite; }
 
     @keyframes orbit { to { transform: rotate(360deg); } }
     @keyframes night {
@@ -168,11 +186,37 @@
     @keyframes flicker { 0%, 100% { opacity: 1 } 45% { opacity: .75 } 60% { opacity: 1 } }
     @keyframes drift { from { transform: translateX(-260px) } to { transform: translateX(1060px) } }
     @keyframes greet {
-        0% { opacity: 0; transform: translateY(8px) }
-      2.5% { opacity: 1; transform: translateY(0) }
-       10% { opacity: 1; transform: translateY(0) }
-     12.5% { opacity: 0; transform: translateY(-8px) }
-      100% { opacity: 0; transform: translateY(-8px) } }
+      0.000% { opacity: 0.000; filter: blur(40.0px) }
+      0.075% { opacity: 0.209; filter: blur(40.0px) }
+      0.188% { opacity: 0.302; filter: blur(40.0px) }
+      0.375% { opacity: 0.398; filter: blur(40.0px) }
+      0.562% { opacity: 0.468; filter: blur(40.0px) }
+      0.750% { opacity: 0.525; filter: blur(32.0px) }
+      1.125% { opacity: 0.618; filter: blur(18.7px) }
+      1.500% { opacity: 0.693; filter: blur(12.0px) }
+      1.875% { opacity: 0.758; filter: blur(8.0px) }
+      2.250% { opacity: 0.815; filter: blur(5.3px) }
+      2.625% { opacity: 0.867; filter: blur(3.4px) }
+      3.000% { opacity: 0.915; filter: blur(2.0px) }
+      3.375% { opacity: 0.959; filter: blur(0.9px) }
+      3.562% { opacity: 0.980; filter: blur(0.4px) }
+      3.750% { opacity: 1.000; filter: blur(0.0px) }
+      12.500% { opacity: 1.000; filter: blur(0.0px) }
+      12.575% { opacity: 0.992; filter: blur(0.2px) }
+      12.688% { opacity: 0.980; filter: blur(0.4px) }
+      12.875% { opacity: 0.959; filter: blur(0.9px) }
+      13.062% { opacity: 0.937; filter: blur(1.4px) }
+      13.250% { opacity: 0.915; filter: blur(2.0px) }
+      13.625% { opacity: 0.867; filter: blur(3.4px) }
+      14.000% { opacity: 0.815; filter: blur(5.3px) }
+      14.375% { opacity: 0.758; filter: blur(8.0px) }
+      14.750% { opacity: 0.693; filter: blur(12.0px) }
+      15.125% { opacity: 0.618; filter: blur(18.7px) }
+      15.500% { opacity: 0.525; filter: blur(32.0px) }
+      15.875% { opacity: 0.398; filter: blur(40.0px) }
+      16.062% { opacity: 0.302; filter: blur(40.0px) }
+      16.250% { opacity: 0.000; filter: blur(40.0px) }
+      100.000% { opacity: 0.000; filter: blur(40.0px) } }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
@@ -275,26 +319,26 @@
       <rect x="640" y="236" width="4" height="6" style="animation-delay:-3s"/>
     </g>
 
-    <!-- rotating greetings: soft shadow, magnified sky inside the letters, lit edges -->
-    <g transform="translate(0 8)" fill="#050c33" opacity=".42" filter="url(#soft)">
-      <text class="g first" x="400" y="148" style="animation-delay:0s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:3s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:9s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:12s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:15s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:18s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:21s">こんにちは</text>
+    <!-- rotating greetings: shadows, magnified sky + tint inside the letters, lit edges -->
+    <g transform="translate(0 8)" fill="#050c33" opacity=".42" filter="url(#meltSoft)">
+      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
     </g>
-    <g transform="translate(0 3)" fill="#050c33" opacity=".3" filter="url(#tight)">
-      <text class="g first" x="400" y="148" style="animation-delay:0s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:3s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:9s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:12s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:15s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:18s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:21s">こんにちは</text>
+    <g transform="translate(0 3)" fill="#050c33" opacity=".3" filter="url(#meltTight)">
+      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
     </g>
     <g mask="url(#words)">
       <g transform="translate(400 122) scale(1.14) translate(-400 -122)" filter="url(#lens)">
@@ -365,17 +409,17 @@
       <circle cx="656" cy="274" r="2.5" fill="#d3d8f2"/>
     </g>
       </g>
+      <rect width="800" height="300" fill="url(#body)"/>
     </g>
-    <g fill="url(#body)" stroke="url(#rim)" stroke-width="1.6" stroke-linejoin="round"
-       filter="url(#bevel)">
-      <text class="g first" x="400" y="148" style="animation-delay:0s">Ciao</text>
-      <text class="g" x="400" y="148" style="animation-delay:3s">Hello</text>
-      <text class="g" x="400" y="148" style="animation-delay:6s">Hola</text>
-      <text class="g" x="400" y="148" style="animation-delay:9s">Bonjour</text>
-      <text class="g" x="400" y="148" style="animation-delay:12s">Hallo</text>
-      <text class="g" x="400" y="148" style="animation-delay:15s">Olá</text>
-      <text class="g" x="400" y="148" style="animation-delay:18s">你好</text>
-      <text class="g" x="400" y="148" style="animation-delay:21s">こんにちは</text>
+    <g fill="#fff" filter="url(#edge)">
+      <text class="g first" x="400" y="148" style="animation-delay:-1.2s">Ciao</text>
+      <text class="g" x="400" y="148" style="animation-delay:2.8s">Hello</text>
+      <text class="g" x="400" y="148" style="animation-delay:6.8s">Hola</text>
+      <text class="g" x="400" y="148" style="animation-delay:10.8s">Bonjour</text>
+      <text class="g" x="400" y="148" style="animation-delay:14.8s">Hallo</text>
+      <text class="g" x="400" y="148" style="animation-delay:18.8s">Olá</text>
+      <text class="g" x="400" y="148" style="animation-delay:22.8s">你好</text>
+      <text class="g" x="400" y="148" style="animation-delay:26.8s">こんにちは</text>
     </g>
   </g>
 </svg>
