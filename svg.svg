@@ -1,85 +1,235 @@
-<svg fill="none" viewBox="0 0 600 300" width="600" height="300" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 800 300" width="800" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scena animata con ciclo giorno e notte sopra le colline toscane; una mano saluta in lingue diverse">
   <defs>
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="5" dy="5" stdDeviation="5" flood-color="#000"/>
-    </filter>
+    <clipPath id="frame"><rect width="800" height="300" rx="18"/></clipPath>
+
+    <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f86de"/>
+      <stop offset="1" stop-color="#bfe6ff"/>
+    </linearGradient>
+    <linearGradient id="skyNight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050820"/>
+      <stop offset="1" stop-color="#2b2f72"/>
+    </linearGradient>
+    <linearGradient id="skyDusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b6b" stop-opacity="0"/>
+      <stop offset="0.6" stop-color="#ff8a4c" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffc060" stop-opacity="0.95"/>
+    </linearGradient>
+    <radialGradient id="sunHalo">
+      <stop offset="0.3" stop-color="#ffe27a" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#ffe27a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moonHalo">
+      <stop offset="0.3" stop-color="#cfd8ff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#cfd8ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- terrain, drawn twice: base colour + dark tint that fades in at night -->
+    <g id="hillsBack">
+      <path d="M0 236 C90 208 170 218 260 231 S420 208 520 225 S700 203 800 221 L800 300 L0 300 Z"/>
+    </g>
+    <g id="skyline">
+      <!-- cathedral dome -->
+      <path d="M318 250 V228 C318 198 342 186 360 186 C378 186 402 198 402 228 V250 Z"/>
+      <path d="M354 172 L360 158 L366 172 Z"/>
+      <rect x="355" y="170" width="10" height="16"/>
+      <rect x="276" y="230" width="44" height="20"/>
+      <rect x="400" y="224" width="46" height="26"/>
+      <!-- bell tower -->
+      <rect x="462" y="186" width="18" height="64"/>
+      <rect x="459" y="181" width="24" height="7"/>
+      <!-- town hall + tower -->
+      <rect x="520" y="218" width="76" height="32"/>
+      <path d="M520 218 v-5 h6 v5 h6 v-5 h6 v5 h6 v-5 h6 v5 h6 v-5 h6 v5 h6 v-5 h6 v5 h6 v-5 h4 v5 Z"/>
+      <rect x="549" y="190" width="14" height="30"/>
+      <rect x="543" y="178" width="26" height="12"/>
+      <path d="M543 178 v-5 h5 v5 h5 v-5 h5 v5 h5 v-5 h5 v5 Z"/>
+      <rect x="551" y="164" width="10" height="14"/>
+      <!-- small houses -->
+      <path d="M226 250 v-16 l16 -10 l16 10 v16 Z"/>
+      <path d="M598 250 v-14 l14 -9 l14 9 v14 Z"/>
+      <path d="M630 250 v-20 l12 -8 l12 8 v20 Z"/>
+    </g>
+    <g id="front">
+      <path d="M0 266 C120 244 240 254 330 260 S520 242 640 254 S760 250 800 248 L800 300 L0 300 Z"/>
+      <ellipse cx="96" cy="244" rx="5" ry="23"/>
+      <ellipse cx="112" cy="248" rx="4.5" ry="19"/>
+      <ellipse cx="205" cy="252" rx="5" ry="22"/>
+      <ellipse cx="690" cy="244" rx="5" ry="24"/>
+      <ellipse cx="708" cy="248" rx="4.5" ry="19"/>
+      <ellipse cx="740" cy="246" rx="5" ry="22"/>
+    </g>
   </defs>
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml">
-      <style>
-        @keyframes hi  {
-            0% { transform: rotate( 0.0deg) }
-           10% { transform: rotate(14.0deg) }
-           20% { transform: rotate(-8.0deg) }
-           30% { transform: rotate(14.0deg) }
-           40% { transform: rotate(-4.0deg) }
-           50% { transform: rotate(10.0deg) }
-           60% { transform: rotate( 0.0deg) }
-          100% { transform: rotate( 0.0deg) }
-        }
 
-        @keyframes gradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
+  <style>
+    :root { --cycle: 24s; --start: -5s; }
 
-        .container {
-          --color-main: #5452ee;
-          --color-primary: #ffff00;
-          --color-secondary: #23a6d5;
-          --color-tertiary: #ffff;
+    .orbit   { transform-box: view-box; transform-origin: 400px 282px;
+               animation: orbit var(--cycle) linear var(--start) infinite; }
+    .night   { opacity: 0; animation: night var(--cycle) linear var(--start) infinite; }
+    .dusk    { opacity: 0; animation: dusk  var(--cycle) linear var(--start) infinite; }
+    .stars   { opacity: 0; animation: starsfade var(--cycle) linear var(--start) infinite; }
+    .s       { fill: #fff; animation: twinkle 3s ease-in-out infinite; }
+    .tint    { opacity: 0; animation: tint var(--cycle) linear var(--start) infinite; }
+    .lights  { opacity: 0; animation: lights var(--cycle) linear var(--start) infinite; }
+    .lights rect { fill: #ffd66b; animation: flicker 5s ease-in-out infinite; }
+    .cloudsA { animation: drift 70s linear -20s infinite; }
+    .cloudsB { animation: drift 95s linear -70s infinite; }
+    .clouds  { opacity: .9; animation: cloudfade var(--cycle) linear var(--start) infinite; }
 
-          background: linear-gradient(-45deg, var(--color-main), var(--color-primary), var(--color-secondary), var(--color-tertiary));
-          background-size: 400% 400%;
-          animation: gradient 15s ease infinite;
+    .hi { font-size: 46px; transform-box: fill-box; transform-origin: 70% 70%;
+          animation: hi 1.5s linear -0.5s infinite; }
+    .g  { font: 700 30px system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans",
+                 "Noto Sans CJK JP", "Microsoft YaHei", sans-serif;
+          fill: #fff; text-anchor: middle; opacity: 0;
+          animation: greet var(--cycle) ease-in-out infinite; }
 
-          width: 100%;
-          height: 300px;
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    @keyframes night {
+      0% { opacity: .5 } 7% { opacity: 0 } 40% { opacity: 0 }
+      54% { opacity: 1 } 92% { opacity: 1 } 100% { opacity: .5 } }
+    @keyframes dusk {
+      0% { opacity: .85 } 9% { opacity: 0 } 40% { opacity: 0 }
+      50% { opacity: .95 } 60% { opacity: 0 } 90% { opacity: 0 } 100% { opacity: .85 } }
+    @keyframes starsfade {
+      0% { opacity: .6 } 6% { opacity: 0 } 44% { opacity: 0 }
+      56% { opacity: 1 } 92% { opacity: 1 } 100% { opacity: .6 } }
+    @keyframes tint {
+      0% { opacity: .4 } 7% { opacity: 0 } 40% { opacity: 0 }
+      54% { opacity: .78 } 92% { opacity: .78 } 100% { opacity: .4 } }
+    @keyframes lights {
+      0% { opacity: .8 } 6% { opacity: 0 } 44% { opacity: 0 }
+      54% { opacity: 1 } 94% { opacity: 1 } 100% { opacity: .8 } }
+    @keyframes cloudfade {
+      0% { opacity: .6 } 8% { opacity: .9 } 40% { opacity: .9 }
+      54% { opacity: .12 } 92% { opacity: .12 } 100% { opacity: .6 } }
+    @keyframes twinkle { 0%, 100% { opacity: 1 } 50% { opacity: .25 } }
+    @keyframes flicker { 0%, 100% { opacity: 1 } 45% { opacity: .75 } 60% { opacity: 1 } }
+    @keyframes drift { from { transform: translateX(-260px) } to { transform: translateX(1060px) } }
+    @keyframes hi {
+        0% { transform: rotate(0deg) }  10% { transform: rotate(14deg) }
+       20% { transform: rotate(-8deg) } 30% { transform: rotate(14deg) }
+       40% { transform: rotate(-4deg) } 50% { transform: rotate(10deg) }
+       60% { transform: rotate(0deg) } 100% { transform: rotate(0deg) } }
+    @keyframes greet {
+        0% { opacity: 0; transform: translateY(8px) }
+      2.5% { opacity: 1; transform: translateY(0) }
+       10% { opacity: 1; transform: translateY(0) }
+     12.5% { opacity: 0; transform: translateY(-8px) }
+      100% { opacity: 0; transform: translateY(-8px) } }
 
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .orbit { transform: rotate(62deg); }
+      .cloudsA { transform: translateX(170px); }
+      .cloudsB { transform: translateX(640px); }
+      .g.first { opacity: 1; }
+    }
+  </style>
 
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        }
+  <g clip-path="url(#frame)">
+    <!-- sky -->
+    <rect width="800" height="300" fill="url(#skyDay)"/>
+    <rect class="night" width="800" height="300" fill="url(#skyNight)"/>
+    <rect class="dusk" width="800" height="300" fill="url(#skyDusk)"/>
 
-        .hi {
-          animation: hi 1.5s linear -0.5s infinite;
-          display: inline-block;
-          transform-origin: 70% 70%;
-        }
+    <g class="stars">
+      <circle class="s" cx="186" cy="121" r="1.6" style="animation-duration:3.9s;animation-delay:-1.9s"/>
+      <circle class="s" cx="239" cy="135" r="2.0" style="animation-duration:2.7s;animation-delay:-2.1s"/>
+      <circle class="s" cx="21" cy="17" r="1.3" style="animation-duration:4.6s;animation-delay:-1.7s"/>
+      <circle class="s" cx="166" cy="73" r="1.1" style="animation-duration:4.0s;animation-delay:-1.7s"/>
+      <circle class="s" cx="774" cy="118" r="2.0" style="animation-duration:3.3s;animation-delay:-3.8s"/>
+      <circle class="s" cx="571" cy="141" r="0.9" style="animation-duration:3.9s;animation-delay:-3.8s"/>
+      <circle class="s" cx="41" cy="53" r="0.9" style="animation-duration:2.5s;animation-delay:-3.7s"/>
+      <circle class="s" cx="482" cy="55" r="2.0" style="animation-duration:4.1s;animation-delay:-1.6s"/>
+      <circle class="s" cx="172" cy="61" r="0.9" style="animation-duration:3.4s;animation-delay:-3.3s"/>
+      <circle class="s" cx="94" cy="64" r="1.1" style="animation-duration:4.0s;animation-delay:-3.2s"/>
+      <circle class="s" cx="691" cy="162" r="0.9" style="animation-duration:2.5s;animation-delay:-1.9s"/>
+      <circle class="s" cx="415" cy="65" r="1.3" style="animation-duration:4.6s;animation-delay:-3.6s"/>
+      <circle class="s" cx="437" cy="88" r="1.3" style="animation-duration:4.7s;animation-delay:-2.0s"/>
+      <circle class="s" cx="343" cy="138" r="1.6" style="animation-duration:2.9s;animation-delay:-3.3s"/>
+      <circle class="s" cx="180" cy="140" r="0.9" style="animation-duration:3.5s;animation-delay:-2.2s"/>
+      <circle class="s" cx="552" cy="70" r="2.0" style="animation-duration:3.8s;animation-delay:-2.2s"/>
+      <circle class="s" cx="655" cy="42" r="1.1" style="animation-duration:3.9s;animation-delay:-2.5s"/>
+      <circle class="s" cx="358" cy="102" r="2.0" style="animation-duration:4.6s;animation-delay:-1.0s"/>
+      <circle class="s" cx="190" cy="30" r="1.1" style="animation-duration:4.2s;animation-delay:-1.5s"/>
+      <circle class="s" cx="717" cy="23" r="2.0" style="animation-duration:4.5s;animation-delay:-3.8s"/>
+      <circle class="s" cx="434" cy="55" r="2.0" style="animation-duration:2.2s;animation-delay:-1.4s"/>
+      <circle class="s" cx="536" cy="110" r="1.1" style="animation-duration:4.6s;animation-delay:-1.0s"/>
+      <circle class="s" cx="593" cy="31" r="1.6" style="animation-duration:4.3s;animation-delay:-3.1s"/>
+      <circle class="s" cx="512" cy="28" r="1.3" style="animation-duration:2.3s;animation-delay:-1.0s"/>
+      <circle class="s" cx="314" cy="22" r="1.6" style="animation-duration:2.8s;animation-delay:-1.6s"/>
+      <circle class="s" cx="364" cy="51" r="1.1" style="animation-duration:4.1s;animation-delay:-1.9s"/>
+      <circle class="s" cx="276" cy="49" r="2.0" style="animation-duration:4.6s;animation-delay:-1.9s"/>
+      <circle class="s" cx="235" cy="107" r="1.1" style="animation-duration:4.5s;animation-delay:-2.4s"/>
+      <circle class="s" cx="454" cy="138" r="2.0" style="animation-duration:4.5s;animation-delay:-1.9s"/>
+      <circle class="s" cx="160" cy="150" r="2.0" style="animation-duration:2.9s;animation-delay:-3.1s"/>
+      <circle class="s" cx="28" cy="111" r="1.1" style="animation-duration:4.7s;animation-delay:-0.1s"/>
+      <circle class="s" cx="625" cy="97" r="1.1" style="animation-duration:4.4s;animation-delay:-2.3s"/>
+      <circle class="s" cx="281" cy="117" r="1.1" style="animation-duration:2.5s;animation-delay:-0.4s"/>
+      <circle class="s" cx="114" cy="61" r="0.9" style="animation-duration:3.9s;animation-delay:-3.1s"/>
+    </g>
 
-        @media (prefers-color-scheme: light) {
-          .container {
-            --color-main: #F15BB5;
-            --color-primary: #24b0ef;
-            --color-secondary: #4526f6;
-            --color-tertiary: #f6f645;
-          }
-        }
+    <!-- clouds -->
+    <g class="clouds">
+      <g class="cloudsA" fill="#fff">
+        <ellipse cx="0" cy="70" rx="38" ry="12"/><ellipse cx="-22" cy="76" rx="26" ry="9"/>
+        <ellipse cx="24" cy="76" rx="28" ry="9"/>
+      </g>
+      <g transform="translate(0 38)">
+        <g class="cloudsB" fill="#fff">
+          <ellipse cx="0" cy="70" rx="30" ry="9"/><ellipse cx="-18" cy="75" rx="20" ry="7"/>
+          <ellipse cx="18" cy="75" rx="22" ry="7"/>
+        </g>
+      </g>
+    </g>
 
-        @media (prefers-reduced-motion) {
-          .container {
-            animation: none;
-          }
+    <!-- sun & moon on opposite sides of the same orbit -->
+    <g class="orbit">
+      <circle cx="150" cy="282" r="52" fill="url(#sunHalo)"/>
+      <circle cx="150" cy="282" r="26" fill="#ffd84a"/>
+      <circle cx="650" cy="282" r="46" fill="url(#moonHalo)"/>
+      <circle cx="650" cy="282" r="21" fill="#eef1ff"/>
+      <circle cx="643" cy="276" r="4" fill="#d3d8f2"/>
+      <circle cx="657" cy="289" r="3" fill="#d3d8f2"/>
+      <circle cx="656" cy="274" r="2.5" fill="#d3d8f2"/>
+    </g>
 
-          .hi {
-            animation: none;
-          }
-        }
-      </style>
+    <!-- terrain -->
+    <use href="#hillsBack" fill="#6d90d8"/>
+    <use href="#hillsBack" fill="#050823" class="tint"/>
+    <use href="#skyline" fill="#41609f"/>
+    <use href="#skyline" fill="#050823" class="tint"/>
+    <use href="#front" fill="#24376f"/>
+    <use href="#front" fill="#030516" class="tint"/>
 
-      <div class="container">
-        <h1 style="filter: url(#shadow);"><div class="hi">👋</div></h1>
-      </div>
-    </div>
-  </foreignObject>
+    <!-- lit windows -->
+    <g class="lights">
+      <rect x="326" y="236" width="4" height="6"/><rect x="340" y="236" width="4" height="6"/>
+      <rect x="284" y="238" width="4" height="5"/><rect x="298" y="238" width="4" height="5"/>
+      <rect x="410" y="232" width="4" height="6" style="animation-delay:-1s"/>
+      <rect x="424" y="232" width="4" height="6" style="animation-delay:-2s"/>
+      <rect x="467" y="198" width="3.5" height="7"/><rect x="467" y="214" width="3.5" height="7"/>
+      <rect x="528" y="226" width="4" height="6" style="animation-delay:-3s"/>
+      <rect x="544" y="226" width="4" height="6" style="animation-delay:-1s"/>
+      <rect x="560" y="226" width="4" height="6" style="animation-delay:-2s"/>
+      <rect x="576" y="226" width="4" height="6"/>
+      <rect x="553" y="196" width="5" height="7"/>
+      <rect x="238" y="240" width="4" height="5" style="animation-delay:-2s"/>
+      <rect x="640" y="236" width="4" height="6" style="animation-delay:-3s"/>
+    </g>
+
+    <!-- hand + rotating greetings -->
+    <text class="hi" x="400" y="102" text-anchor="middle">👋</text>
+    <rect x="250" y="122" width="300" height="46" rx="23" fill="#0a0e2a" fill-opacity=".4"
+          stroke="#fff" stroke-opacity=".25"/>
+    <text class="g first" x="400" y="155" style="animation-delay:0s">Ciao</text>
+    <text class="g" x="400" y="155" style="animation-delay:3s">Hello</text>
+    <text class="g" x="400" y="155" style="animation-delay:6s">Hola</text>
+    <text class="g" x="400" y="155" style="animation-delay:9s">Bonjour</text>
+    <text class="g" x="400" y="155" style="animation-delay:12s">Hallo</text>
+    <text class="g" x="400" y="155" style="animation-delay:15s">Olá</text>
+    <text class="g" x="400" y="155" style="animation-delay:18s">你好</text>
+    <text class="g" x="400" y="155" style="animation-delay:21s">こんにちは</text>
+  </g>
 </svg>
