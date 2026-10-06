@@ -1,3 +1,1 @@
-<div style="width: 100%;">
-  <img src="svg.svg" style="width: 100%;" alt="">
-</div>
+<img src="svg.svg" width="100%" alt="Banner animato con una mano che saluta">
